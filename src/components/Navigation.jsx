@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import './Navigation.css'
 
-const Navigation = ({ currentSection, setCurrentSection }) => {
+const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,13 +32,11 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
       <div className="nav-container">
         <div className="nav-links">
           {navItems.map((item) => (
-            <div
+            <Link
               key={item.path}
-              className={`nav-link ${currentSection === item.label.toLowerCase() ? 'active' : ''}`}
-              onClick={() => {
-                setCurrentSection(item.label.toLowerCase())
-                setIsMenuOpen(false)
-              }}
+              to={item.path}
+              className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+              onClick={() => setIsMenuOpen(false)}
             >
               <motion.span
                 whileHover={{ y: -2 }}
@@ -44,7 +44,7 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
               >
                 {item.label}
               </motion.span>
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -86,15 +86,13 @@ const Navigation = ({ currentSection, setCurrentSection }) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div
-                  className={`mobile-nav-link ${currentSection === item.label.toLowerCase() ? 'active' : ''}`}
-                  onClick={() => {
-                    setCurrentSection(item.label.toLowerCase())
-                    setIsMenuOpen(false)
-                  }}
+                <Link
+                  to={item.path}
+                  className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
