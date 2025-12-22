@@ -1,0 +1,97 @@
+.footer {
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  padding: 0.4rem 0;
+  font-family: 'Alumni Sans SC', sans-serif;
+  letter-spacing: 0.2em;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: inherit;
+  font-family: 'Alumni Sans SC', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.25em;
+}
+
+.footer-link:hover {
+  opacity: 0.8;
+}
+
+.footer-separator {
+  font-size: 0.9rem;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.footer-right {
+  margin-left: auto;
+}
+
+.footer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 0;
+}
+
+.footer-icon img {
+  width: 26px;
+  height: 26px;
+  border-radius: 0px;
+  display: block;
+}
+
+.footer-icon span {
+  font-family: 'Alumni Sans SC', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .footer-right {
+    margin-left: 0;
+  }
+
+  .footer-copy {
+    font-size: 0.7rem;
+  }
+}
+
+
