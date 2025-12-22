@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import './Home.css'
+import countries from '../data/countries.json'
 
 // Import images directly
 import img1 from '/Rectangle 1.png'
@@ -20,6 +21,16 @@ const Home = () => {
     { id: 5, image: img5 },
     { id: 6, image: img6 },
   ]
+
+  useEffect(() => {
+    // Add smooth scroll class to html when on home page
+    document.documentElement.classList.add('home-page-scroll')
+    
+    return () => {
+      // Remove class when component unmounts
+      document.documentElement.classList.remove('home-page-scroll')
+    }
+  }, [])
 
   return (
     <div className="home-container">
@@ -56,35 +67,37 @@ const Home = () => {
                       <div>
                         <div className="spotify-artist">CJ Germany</div>
                         <div className="spotify-subtitle">Top tracks</div>
-                        <button className="spotify-follow">Follow</button>
+                        {/* 
+                          To find CJ Germany's Spotify Artist ID:
+                          1. Go to https://open.spotify.com and search for "CJ Germany"
+                          2. Open the artist profile
+                          3. Click "Share" → "Copy link to artist"
+                          4. The link will be: https://open.spotify.com/artist/ARTIST_ID_HERE
+                          5. Replace the ID below with the actual artist ID from the URL
+                        */}
+                        <a 
+                          href="https://open.spotify.com/artist/REPLACE_WITH_ACTUAL_ARTIST_ID" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="spotify-follow"
+                          style={{ textDecoration: 'none', display: 'inline-block' }}
+                        >
+                          Follow
+                        </a>
                       </div>
-                    </div>
-                    <div className="spotify-header-actions">
-                      <button className="spotify-prev-btn">&#9664;</button>
-                      <button className="spotify-next-btn">&#9654;</button>
-                      <button className="spotify-play-btn">&#9658;</button>
                     </div>
                   </div>
 
-                  <div className="spotify-tracklist-wrapper">
-                    <div className="spotify-scroll-arrow spotify-scroll-arrow-up">▲</div>
-                    <div className="spotify-tracklist">
-                      {[1, 2, 3, 4, 5, 6].map((num) => (
-                        <div key={num} className="spotify-track-row">
-                          <div className="spotify-track-left">
-                            <div className="spotify-track-index">{num}</div>
-                            <div>
-                              <div className="spotify-track-title">
-                                Vaa Vaathi (Tamil Violin Cover)
-                              </div>
-                              <div className="spotify-track-meta">CJG | M. Kowtham</div>
-                            </div>
-                          </div>
-                          <div className="spotify-track-duration">04:39</div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="spotify-scroll-arrow spotify-scroll-arrow-down">▼</div>
+                  <div className="spotify-embed-wrapper">
+                    <iframe
+                      style={{ borderRadius: '0 0 18px 18px', border: 'none' }}
+                      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+                      width="100%"
+                      height="380"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                      title="CJ Germany Playlist"
+                    ></iframe>
                   </div>
                 </div>
               </div>
@@ -110,6 +123,16 @@ const Home = () => {
               </div>
             )}
 
+            {section.id === 4 && (
+              <div className="nature-section">
+                <div className="nature-text-block">
+                  <p className="nature-text">
+                    In the quiet embrace of nature, she finds her rhythm—where every petal whispers poetry and every page holds a promise. Dressed in simplicity, surrounded by color, she reads not just words, but the world around her. This is where music begins—not with sound, but with stillness.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {section.id === 6 && (
               <div className="tribe-section">
                 <div className="tribe-card">
@@ -124,10 +147,11 @@ const Home = () => {
                       Phone Number:
                       <div className="tribe-phone-wrapper">
                         <select className="tribe-flag-select" defaultValue="+91">
-                          <option value="+91">🇮🇳 +91</option>
-                          <option value="+1">🇺🇸 +1</option>
-                          <option value="+44">🇬🇧 +44</option>
-                          <option value="+49">🇩🇪 +49</option>
+                          {countries.map((country) => (
+                            <option key={country.code} value={country.dial_code}>
+                              {country.flag ? `${country.flag} ${country.dial_code}` : country.dial_code}
+                            </option>
+                          ))}
                         </select>
                         <input
                           type="tel"

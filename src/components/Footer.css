@@ -23,59 +23,53 @@
 }
 
 .footer-left,
-.footer-center,
 .footer-right {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.footer-link {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  color: inherit;
-  font-family: 'Alumni Sans SC', sans-serif;
+.footer-left span {
   font-size: 0.9rem;
   letter-spacing: 0.25em;
 }
 
-.footer-link:hover {
-  opacity: 0.8;
-}
-
-.footer-separator {
-  font-size: 0.9rem;
-}
-
-.footer-copy {
-  font-size: 0.8rem;
-  white-space: nowrap;
-}
-
 .footer-right {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.footer-icon {
+.footer-copyright {
+  font-size: 0.8rem;
+  white-space: nowrap;
+  letter-spacing: 0.2em;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  padding: 0;
+  color: #fff;
+  transition: opacity 0.3s ease;
 }
 
-.footer-icon img {
-  width: 26px;
-  height: 26px;
-  border-radius: 0px;
+.social-icon:hover {
+  opacity: 0.8;
+}
+
+.social-icon svg {
+  width: 24px;
+  height: 24px;
   display: block;
-}
-
-.footer-icon span {
-  font-family: 'Alumni Sans SC', sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -89,7 +83,7 @@
     margin-left: 0;
   }
 
-  .footer-copy {
+  .footer-copyright {
     font-size: 0.7rem;
   }
 }
