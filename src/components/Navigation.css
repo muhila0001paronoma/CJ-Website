@@ -1,0 +1,159 @@
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: all 0.3s ease;
+  padding: 1.5rem 0;
+}
+
+.navigation.scrolled {
+  padding: 1rem 0;
+  background: transparent;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  font-family: 'Alumni Sans SC', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: 'Alumni Sans SC', sans-serif;
+  color: var(--text-light);
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--accent-color);
+}
+
+.nav-link.active {
+  color: var(--accent-color);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-color);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: absolute;
+  right: 2rem;
+}
+
+.shop-link {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 2px;
+  background: var(--secondary-color);
+  transition: all 0.3s ease;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: 2rem;
+  background: rgba(26, 26, 26, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-link {
+  font-family: 'Alumni Sans SC', sans-serif;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .nav-container {
+    padding: 0 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-link {
+    font-size: 0.8rem;
+  }
+}
+
