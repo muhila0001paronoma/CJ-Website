@@ -4,19 +4,28 @@
   background-color: transparent;
 }
 
+/* Smooth scroll with snap for home page */
+html.home-page-scroll {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
 .home-section {
   width: 100%;
   height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex-shrink: 0;
 }
 
 .home-section::after {
@@ -39,9 +48,404 @@
   z-index: 1;
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
+.bio-section {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 6% 6%;
+  gap: 3rem;
 }
+
+.bio-photo-wrapper {
+  flex: 0 0 320px;
+  max-width: 340px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.bio-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bio-text-card {
+  flex: 1;
+  max-width: 640px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 26px;
+  padding: 1.9rem 2.2rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+  margin-top: 20.5rem;
+}
+
+.bio-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  letter-spacing: 0.07em;
+  color: #ffffff;
+}
+
+.moment-section {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 8%;
+  padding-right: 8%;
+}
+
+.moment-text-block {
+  max-width: 420px;
+  color: #ffffff;
+}
+
+.moment-title {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.moment-title span {
+  display: block;
+}
+
+.moment-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.spotify-card {
+  width: 380px;
+  max-width: 46%;
+  background: #4a4a4a;
+  border-radius: 18px;
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.spotify-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem 1.1rem;
+}
+
+.spotify-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.spotify-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: #777;
+}
+
+.spotify-artist {
+  font-family: 'Alumni Sans SC', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+}
+
+.spotify-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 0.35rem;
+}
+
+.spotify-follow {
+  padding: 0.25rem 0.9rem;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.spotify-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.spotify-prev-btn,
+.spotify-next-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.spotify-play-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: #ffffff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.spotify-embed-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.spotify-embed-wrapper iframe {
+  width: 100%;
+  border: none;
+  display: block;
+}
+
+.tribe-section {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 4rem 0 2rem;
+}
+
+.tribe-card {
+  width: 70%;
+  max-width: 720px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  border: 2px solid var(--accent-color);
+  padding: 2.5rem 3rem 2.75rem;
+  color: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(18px);
+}
+
+.tribe-title {
+  text-align: center;
+  font-family: 'Arabic Typesetting', 'Playfair Display', serif;
+  font-size: 2.4rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin: 0 0 0.8rem;
+}
+
+.tribe-subtitle {
+  text-align: center;
+  font-family: 'Anaheim', 'Inter', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 2rem;
+}
+
+.tribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tribe-label {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Anaheim', 'Inter', sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.tribe-phone-wrapper {
+  margin-top: 0.55rem;
+  display: flex;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tribe-flag-select {
+  width: 130px;
+  border: none;
+  outline: none;
+  background: #f7931e;
+  color: #111111;
+  padding: 0.65rem 0.9rem;
+  font-family: 'Anaheim', 'Inter', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.tribe-flag-select option {
+  background: #ffffff;
+  color: #111111;
+}
+
+.tribe-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-family: 'Anaheim', 'Inter', sans-serif;
+  font-size: 0.95rem;
+}
+
+.tribe-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tribe-phone-input {
+  border-radius: 0;
+}
+
+.tribe-submit {
+  margin-top: 1.5rem;
+  align-self: center;
+  padding: 0.7rem 2.8rem;
+  border-radius: 6px;
+  border: none;
+  background: #c53a1e;
+  color: #ffffff;
+  font-family: 'Alumni Sans SC', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tribe-submit:hover {
+  background: #e04825;
+}
+
+.nature-section {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 6%;
+}
+
+.nature-text-block {
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.nature-text {
+  font-family: 'ADLaM Display', cursive;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  margin: 0;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .bio-section {
+    flex-direction: column;
+    padding: 5rem 1.5rem 3rem;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .bio-photo-wrapper {
+    flex: 0 0 auto;
+    width: 70%;
+    max-width: 360px;
+  }
+
+  .bio-text-card {
+    width: 100%;
+    padding: 1.6rem 1.6rem;
+  }
+
+  .moment-section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .moment-title {
+    font-size: 2.2rem;
+    letter-spacing: 0.2em;
+  }
+
+  .spotify-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .tribe-card {
+    width: 100%;
+    padding: 2rem 1.75rem 2.25rem;
+  }
+
+  .tribe-section {
+    justify-content: center;
+    padding: 0 1.5rem;
+  }
+
+  .tribe-title {
+    font-size: 1.9rem;
+    letter-spacing: 0.28em;
+  }
+
+  .nature-section {
+    padding: 0 2rem;
+    justify-content: center;
+  }
+
+  .nature-text-block {
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+  }
+
+  .nature-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+}
+
 
 

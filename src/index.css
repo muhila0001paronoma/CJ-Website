@@ -17,6 +17,7 @@ body {
   background-color: transparent;
   color: var(--secondary-color);
   overflow-x: hidden;
+  overflow-y: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
