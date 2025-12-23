@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import VideoSlider from './VideoSlider'
 import './Home.css'
 import countries from '../data/countries.json'
 
@@ -23,29 +24,38 @@ const Home = () => {
   ]
 
   useEffect(() => {
-    // Add smooth scroll class to html when on home page
+    // Add smooth scroll class to html and body when on home page
     document.documentElement.classList.add('home-page-scroll')
+    document.body.classList.add('home-page-scroll')
     
     return () => {
       // Remove class when component unmounts
       document.documentElement.classList.remove('home-page-scroll')
+      document.body.classList.remove('home-page-scroll')
     }
   }, [])
 
   return (
     <div className="home-container">
-      {sections.map((section, index) => (
-        <motion.section
-          key={section.id}
-          className="home-section"
-          style={{ 
-            backgroundImage: `url(${section.image})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
-          <div className="section-content">
+      {/* Video Slider Section - First Section */}
+      <VideoSlider />
+
+      {sections.map((section, index) => {
+        // Skip the first section (id: 1) as it's replaced by VideoSlider
+        if (section.id === 1) return null
+        
+        return (
+          <motion.section
+            key={section.id}
+            className="home-section"
+            style={{ 
+              backgroundImage: `url(${section.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <div className="section-content">
             {section.id === 2 && (
               <div className="moment-section">
                 <div className="moment-text-block">
@@ -61,42 +71,15 @@ const Home = () => {
                 </div>
 
                 <div className="spotify-card">
-                  <div className="spotify-card-header">
-                    <div className="spotify-profile">
-                      <div className="spotify-avatar" />
-                      <div>
-                        <div className="spotify-artist">CJ Germany</div>
-                        <div className="spotify-subtitle">Top tracks</div>
-                        {/* 
-                          To find CJ Germany's Spotify Artist ID:
-                          1. Go to https://open.spotify.com and search for "CJ Germany"
-                          2. Open the artist profile
-                          3. Click "Share" → "Copy link to artist"
-                          4. The link will be: https://open.spotify.com/artist/ARTIST_ID_HERE
-                          5. Replace the ID below with the actual artist ID from the URL
-                        */}
-                        <a 
-                          href="https://open.spotify.com/artist/REPLACE_WITH_ACTUAL_ARTIST_ID" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="spotify-follow"
-                          style={{ textDecoration: 'none', display: 'inline-block' }}
-                        >
-                          Follow
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
                   <div className="spotify-embed-wrapper">
                     <iframe
                       style={{ borderRadius: '0 0 18px 18px', border: 'none' }}
-                      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+                      src="https://open.spotify.com/embed/playlist/37i9dQZF1EIXlOSE2lf0VA?utm_source=generator&theme=0"
                       width="100%"
                       height="380"
                       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                       loading="lazy"
-                      title="CJ Germany Playlist"
+                      title="CJ Germany Mix"
                     ></iframe>
                   </div>
                 </div>
@@ -179,7 +162,8 @@ const Home = () => {
             )}
           </div>
         </motion.section>
-      ))}
+        )
+      })}
     </div>
   )
 }
