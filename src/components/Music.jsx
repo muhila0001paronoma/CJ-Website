@@ -5,22 +5,8 @@ import AudioPlayer from './AudioPlayer'
 import { fetchChannelVideos } from '../services/youtubeService'
 import './Music.css'
 
-// Import background image
 import musicBG from '../assets/Music/Music BG.png'
 
-// Import video assets
-import video1Thumb from '../assets/Music/video-01-thumbnail.jpg'
-import video2Thumb from '../assets/Music/video-02-thumbnail.jpg'
-import video3Thumb from '../assets/Music/video-03-thumbnail.jpg'
-import video4Thumb from '../assets/Music/video-04-thumbnail.jpg'
-import video5Thumb from '../assets/Music/video-05-thumbnail.jpg'
-import video1 from '../assets/Music/video-01.mp4'
-import video2 from '../assets/Music/video-02.mp4'
-import video3 from '../assets/Music/video-03.mp4'
-import video4 from '../assets/Music/video-04.mp4'
-import video5 from '../assets/Music/video-05.mp4'
-
-// Import song assets
 import song1Thumb from '../assets/Music/music-01-thumbnail.jpg'
 import song2Thumb from '../assets/Music/music-02-thumbnail.jpg'
 import song3Thumb from '../assets/Music/music-03-thumbnail.jpg'
@@ -42,16 +28,6 @@ const Music = () => {
   const [youtubeVideos, setYoutubeVideos] = useState([])
   const [isLoadingVideos, setIsLoadingVideos] = useState(true)
 
-  // Local video files (fallback)
-  const localVideos = [
-    { id: 1, brand: 'CJG', title: 'Mayilirage (Tamil Violin Cover)', artist: 'feat. M. Kowtham', thumbnail: video1Thumb, video: video1 },
-    { id: 2, brand: 'CJG', title: 'Depression', language: 'Tamil Video', thumbnail: video2Thumb, video: video2 },
-    { id: 3, brand: 'CJG', title: 'Vaa Vaathi (Tamil Violin Cover)', artist: 'feat. M. Kowtham', thumbnail: video3Thumb, video: video3 },
-    { id: 4, brand: 'CJ Germany', title: 'Jimikki Kammal (Violin Cover)', artist: 'feat. Princeten', thumbnail: video4Thumb, video: video4 },
-    { id: 5, brand: 'CJ Germany', title: 'NENJINILE REBIRTH - THE VIOLIN', artist: 'feat. Chris G.', language: 'Official Violin Version', thumbnail: video5Thumb, video: video5 },
-  ]
-
-  // Fetch YouTube videos on component mount
   useEffect(() => {
     const loadYouTubeVideos = async () => {
       const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
