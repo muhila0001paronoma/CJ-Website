@@ -1,17 +1,19 @@
 import React, { useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getYouTubeEmbedUrl } from '../services/youtubeService'
 import './VideoPlayer.css'
 
 const VideoPlayer = ({ video, isOpen, onClose }) => {
   const videoRef = useRef(null)
+  const isYouTube = video?.isYouTube || video?.youtubeId
 
   useEffect(() => {
-    if (isOpen && videoRef.current) {
+    if (isOpen && videoRef.current && !isYouTube) {
       videoRef.current.play()
-    } else if (videoRef.current) {
+    } else if (videoRef.current && !isYouTube) {
       videoRef.current.pause()
     }
-  }, [isOpen])
+  }, [isOpen, isYouTube])
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -53,15 +55,26 @@ const VideoPlayer = ({ video, isOpen, onClose }) => {
             </svg>
           </button>
           <div className="video-wrapper">
-            <video
-              ref={videoRef}
-              src={video.video}
-              controls
-              autoPlay
-              className="video-element"
-            >
-              Your browser does not support the video tag.
-            </video>
+            {isYouTube ? (
+              <iframe
+                src={getYouTubeEmbedUrl(video.youtubeId || video.id)}
+                className="video-element youtube-iframe"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={video.title}
+              ></iframe>
+            ) : (
+              <video
+                ref={videoRef}
+                src={video.video}
+                controls
+                autoPlay
+                className="video-element"
+              >
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
           <div className="video-info">
             {video.brand && <p className="video-brand">{video.brand}</p>}
