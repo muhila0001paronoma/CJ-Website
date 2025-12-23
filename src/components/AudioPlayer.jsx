@@ -19,6 +19,7 @@ const AudioPlayer = ({ song, isOpen, onClose }) => {
       setIsPlaying(false)
     }
   }, [isOpen])
+  
 
   useEffect(() => {
     const handleEscape = (e) => {
