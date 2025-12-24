@@ -1,32 +1,22 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import VideoPlayer from './VideoPlayer'
-import AudioPlayer from './AudioPlayer'
 import { fetchChannelVideos } from '../services/youtubeService'
 import './Music.css'
 
 import musicBG from '../assets/Music/Music BG.png'
-
-import song1Thumb from '../assets/Music/music-01-thumbnail.jpg'
-import song2Thumb from '../assets/Music/music-02-thumbnail.jpg'
-import song3Thumb from '../assets/Music/music-03-thumbnail.jpg'
-import song4Thumb from '../assets/Music/music-04-thumbnail.jpg'
-import song5Thumb from '../assets/Music/music-05-thumbnail.jpg'
-import song1 from '../assets/Music/music-01.mp3'
-import song2 from '../assets/Music/music-02.mp3'
-import song3 from '../assets/Music/music-03.mp3'
-import song4 from '../assets/Music/music-04.mp3'
-import song5 from '../assets/Music/music-05.mp3'
+import { musicSongs } from '../data/musicSongs'
 
 const Music = () => {
+  const navigate = useNavigate()
   const videosScrollRef = useRef(null)
   const songsScrollRef = useRef(null)
   const [selectedVideo, setSelectedVideo] = useState(null)
-  const [selectedSong, setSelectedSong] = useState(null)
   const [isVideoPlayerOpen, setIsVideoPlayerOpen] = useState(false)
-  const [isAudioPlayerOpen, setIsAudioPlayerOpen] = useState(false)
   const [youtubeVideos, setYoutubeVideos] = useState([])
   const [isLoadingVideos, setIsLoadingVideos] = useState(true)
+  const [songQuery, setSongQuery] = useState('')
 
   useEffect(() => {
     const loadYouTubeVideos = async () => {
@@ -36,7 +26,8 @@ const Music = () => {
       // Check if API key and channel ID are configured
       if (!apiKey || apiKey === 'YOUR_YOUTUBE_API_KEY_HERE' || 
           !channelId || channelId === 'YOUR_CHANNEL_ID_HERE') {
-        console.log('YouTube API not configured. Using local videos.')
+        console.log('YouTube API not configured. Videos section will be empty.')
+        setYoutubeVideos([])
         setIsLoadingVideos(false)
         return
       }
@@ -49,11 +40,12 @@ const Music = () => {
           setYoutubeVideos(videos)
           console.log(`Loaded ${videos.length} videos from YouTube channel`)
         } else {
-          console.log('No videos found in YouTube channel. Using local videos.')
+          setYoutubeVideos([])
+          console.log('No videos found in YouTube channel.')
         }
       } catch (error) {
         console.error('Failed to load YouTube videos:', error)
-        // Fallback to local videos if YouTube fails
+        setYoutubeVideos([])
       } finally {
         setIsLoadingVideos(false)
       }
@@ -62,16 +54,30 @@ const Music = () => {
     loadYouTubeVideos()
   }, [])
 
-  // Use YouTube videos if available, otherwise use local videos
-  const videos = youtubeVideos.length > 0 ? youtubeVideos : localVideos
+  // YouTube videos only (no local fallback)
+  const videos = youtubeVideos || []
 
-  const songs = [
-    { id: 1, title: 'Vaa Vaathi', thumbnail: song1Thumb, audio: song1 },
-    { id: 2, title: 'Mayilirage', thumbnail: song2Thumb, audio: song2 },
-    { id: 3, title: 'Naani koni', thumbnail: song3Thumb, audio: song3 },
-    { id: 4, title: 'Velicha Poove', thumbnail: song4Thumb, audio: song4 },
-    { id: 5, title: 'Mannipaaya', thumbnail: song5Thumb, audio: song5 },
-  ]
+  const songs = musicSongs
+
+  const normalizedSongQuery = songQuery.trim().toLowerCase()
+  const filteredSongs = songs.filter((s) => {
+    if (!normalizedSongQuery) return true
+    return (
+      (s.title || '').toLowerCase().includes(normalizedSongQuery) ||
+      (s.subtitle || '').toLowerCase().includes(normalizedSongQuery) ||
+      (s.artist || '').toLowerCase().includes(normalizedSongQuery)
+    )
+  })
+
+  const openPlayerPage = (songId) => {
+    navigate('/music/player', {
+      state: {
+        songId,
+        queueIds: filteredSongs.map((s) => s.id),
+        from: '/music'
+      }
+    })
+  }
 
   const scrollVideos = (direction) => {
     const container = videosScrollRef.current
@@ -125,6 +131,13 @@ const Music = () => {
             )}
             {!isLoadingVideos && (
               <div className="items-row">
+                {videos.length === 0 && (
+                  <div className="loading-container">
+                    <p className="loading-text">
+                      No videos available. Configure <strong>VITE_YOUTUBE_API_KEY</strong> and <strong>VITE_YOUTUBE_CHANNEL_ID</strong>.
+                    </p>
+                  </div>
+                )}
                 {videos.map((video) => (
                   <motion.div
                     key={video.id}
@@ -159,6 +172,28 @@ const Music = () => {
         <section className="songs-section">
           <div className="songs-header">
             <h2 className="section-title">SONGS</h2>
+            <div className="songs-header-right">
+              <div className="songs-search">
+                <svg className="songs-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                  className="songs-search-input"
+                  type="text"
+                  value={songQuery}
+                  onChange={(e) => setSongQuery(e.target.value)}
+                  placeholder="Search songs..."
+                  aria-label="Search songs"
+                />
+                {songQuery && (
+                  <button className="songs-search-clear" onClick={() => setSongQuery('')} aria-label="Clear search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
+              </div>
             <div className="scroll-controls">
               <button className="scroll-arrow" onClick={() => scrollSongs('left')} aria-label="Scroll left">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -171,18 +206,23 @@ const Music = () => {
                 </svg>
               </button>
             </div>
+            </div>
           </div>
           <div className="scroll-container" ref={songsScrollRef}>
             <div className="items-row">
-              {songs.map((song) => (
+              {filteredSongs.length === 0 && (
+                <div className="songs-empty">
+                  <p className="songs-empty-text">No songs found.</p>
+                </div>
+              )}
+              {filteredSongs.map((song) => (
                 <motion.div
                   key={song.id}
                   className="song-card"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                   onClick={() => {
-                    setSelectedSong(song)
-                    setIsAudioPlayerOpen(true)
+                    openPlayerPage(song.id)
                   }}
                 >
                   <div className="thumbnail-container">
@@ -246,17 +286,6 @@ const Music = () => {
         />
       )}
 
-      {/* Audio Player Popup */}
-      {isAudioPlayerOpen && (
-        <AudioPlayer
-          song={selectedSong}
-          isOpen={isAudioPlayerOpen}
-          onClose={() => {
-            setIsAudioPlayerOpen(false)
-            setSelectedSong(null)
-          }}
-        />
-      )}
     </div>
   )
 }
