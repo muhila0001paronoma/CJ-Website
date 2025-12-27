@@ -12,6 +12,9 @@ import img4 from '/Rectangle 4.png'
 import img5 from '/Rectangle 5.png'
 import img6 from '/Rectangle 30.png'
 import imgPortrait from '/Rectangle 23.png'
+import home1 from '/home1.png'
+import home2 from '/home2.png'
+import home3 from '/home3.png'
 
 const Home = () => {
   const sections = [
@@ -37,7 +40,56 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Video Slider Section - First Section */}
+      {/* Home Image Sections - Before Video */}
+      <motion.section
+        className="home-section"
+        style={{ 
+          backgroundImage: `url(${home3})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+        initial={{ opacity: 0, scale: 1.1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
+        <div className="section-content"></div>
+      </motion.section>
+
+      <motion.section
+        className="home-section"
+        style={{ 
+          backgroundImage: `url(${home1})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+        initial={{ opacity: 0, scale: 1.1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
+        <div className="section-content"></div>
+      </motion.section>
+
+      <motion.section
+        className="home-section"
+        style={{ 
+          backgroundImage: `url(${home2})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+        initial={{ opacity: 0, scale: 1.1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
+        <div className="section-content"></div>
+      </motion.section>
+
+      {/* Video Slider Section */}
       <VideoSlider />
 
       {sections.map((section, index) => {
@@ -54,23 +106,66 @@ const Home = () => {
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat'
             }}
+            initial={{ opacity: 0, scale: 1.1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
           >
             <div className="section-content">
             {section.id === 2 && (
               <div className="moment-section">
-                <div className="moment-text-block">
-                  <div className="moment-title">
-                    <span>A Moment</span>
-                    <span>in</span>
-                    <span>Bloom</span>
-                  </div>
-                  <p className="moment-description">
+                <motion.div 
+                  className="moment-text-block"
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <motion.div 
+                    className="moment-title"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
+                    <motion.span
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >A Moment</motion.span>
+                    <motion.span
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.6 }}
+                    >in</motion.span>
+                    <motion.span
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.7 }}
+                    >Bloom</motion.span>
+                  </motion.div>
+                  <motion.p 
+                    className="moment-description"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                  >
                     In the quiet pause between notes, a story unfolds—fragile, fleeting,
                     and achingly human. This is where the music remembers us.
-                  </p>
-                </div>
+                  </motion.p>
+                </motion.div>
 
-                <div className="spotify-card">
+                <motion.div 
+                  className="spotify-card"
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >
                   <div className="spotify-embed-wrapper">
                     <iframe
                       style={{ borderRadius: '0 0 18px 18px', border: 'none' }}
@@ -82,50 +177,92 @@ const Home = () => {
                       title="CJ Germany Mix"
                     ></iframe>
                   </div>
-                </div>
+                </motion.div>
               </div>
             )}
 
             {section.id === 3 && (
               <div className="bio-section">
-                <div className="bio-photo-wrapper">
+                <motion.div 
+                  className="bio-photo-wrapper"
+                  initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
                   <img
                     src={imgPortrait}
                     alt="CJ Germany playing violin"
                     className="bio-photo"
                   />
-                </div>
+                </motion.div>
 
-                <div className="bio-text-card">
+                <motion.div 
+                  className="bio-text-card"
+                  initial={{ opacity: 0, x: 50, y: 30 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
                   <p className="bio-text">
                     Having stepped behind the microphone at the tender age of 12, CJ Germany&apos;s
                     journey has been anything but ordinary. Across countless stages and stories,
                     the violin has become his voice—fragile, fierce, and always honest.
                   </p>
-                </div>
+                </motion.div>
               </div>
             )}
 
             {section.id === 4 && (
               <div className="nature-section">
-                <div className="nature-text-block">
+                <motion.div 
+                  className="nature-text-block"
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
                   <p className="nature-text">
                     In the quiet embrace of nature, she finds her rhythm—where every petal whispers poetry and every page holds a promise. Dressed in simplicity, surrounded by color, she reads not just words, but the world around her. This is where music begins—not with sound, but with stillness.
                   </p>
-                </div>
+                </motion.div>
               </div>
             )}
 
             {section.id === 6 && (
               <div className="tribe-section">
-                <div className="tribe-card">
-                  <h2 className="tribe-title">JOIN THE TREIBE</h2>
-                  <p className="tribe-subtitle">
+                <motion.div 
+                  className="tribe-card"
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <motion.h2 
+                    className="tribe-title"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                  >JOIN THE TREIBE</motion.h2>
+                  <motion.p 
+                    className="tribe-subtitle"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
                     From my heart to yours, this is where we stay connected beyond the music.
                     A space for stories.
-                  </p>
+                  </motion.p>
 
-                  <form className="tribe-form">
+                  <motion.form 
+                    className="tribe-form"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                  >
                     <label className="tribe-label">
                       Phone Number:
                       <div className="tribe-phone-wrapper">
@@ -156,8 +293,8 @@ const Home = () => {
                     <button type="submit" className="tribe-submit">
                       JOIN THE TRIBE
                     </button>
-                  </form>
-                </div>
+                  </motion.form>
+                </motion.div>
               </div>
             )}
           </div>
